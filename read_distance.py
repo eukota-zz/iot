@@ -21,7 +21,7 @@ def init_logging(self, log_level = 'WARNING') -> None:
         logger.addHandler(console_handler)
 
 with Sensor(pin_trigger=7, pin_echo=11) as sensor:
-        sensor.set_log_level('INFO')
+        sensor.init_logging('INFO')
         while(True):
                 print("Distance: %5.2f in" % sensor.distance_in_inches())
                 time.sleep(read_interval)

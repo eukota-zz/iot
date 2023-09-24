@@ -17,7 +17,7 @@ if args.verbose:
 
 with Sensor(pin_trigger = 7, pin_echo = 11) as sensor:
         if args.verbose:
-                sensor.set_log_level('INFO')
+                sensor.init_logging('INFO')
         distance_in_inches = sensor.distance_in_inches()
         res = ("%s: %5.2f in" % (datetime.datetime.now(), distance_in_inches))
         if not args.append:
