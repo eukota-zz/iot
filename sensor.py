@@ -9,31 +9,22 @@ import logging
 SPEED_OF_SOUND_IN_CM_PER_S = 34300.0
 
 class Sensor:
-    def __init__(self, pin_trigger, pin_echo) -> None:
-        self.init_logging()
+    def __init__(self, pin_trigger, pin_echo, sleep_time=5) -> None:
         GPIO.setmode(GPIO.BOARD)
         self.PIN_TRIGGER = pin_trigger
         self.PIN_ECHO = pin_echo
         GPIO.setup(self.PIN_TRIGGER, GPIO.OUT)
         GPIO.setup(self.PIN_ECHO, GPIO.IN)
         GPIO.output(self.PIN_TRIGGER, GPIO.LOW)
-        logging.info("Waiting for sensor to settle")
-        time.sleep(5)
-        logging.info("Calculating distance")
+        logging.debug("Waiting for sensor to settle")
+        time.sleep(sleep_time)
+        logging.debug("Calculating distance")
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         GPIO.cleanup()
-
-    def init_logging(self, log_level = 'WARNING') -> None:
-        console_handler = logging.StreamHandler()
-        console_handler.setLevel(getattr(logging, log_level))
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-        console_handler.setFormatter(formatter)
-        logger = logging.getLogger()
-        logger.addHandler(console_handler)
 
     def pulse(self, interval = 0.00001) -> None:
         GPIO.output(self.PIN_TRIGGER, GPIO.HIGH)

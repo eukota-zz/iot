@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import datetime
+import logging
 from sensor import Sensor
 
 parser = argparse.ArgumentParser(description='Logs the distance in inches from the distance sensor to input file.')
@@ -17,7 +18,7 @@ if args.verbose:
 
 with Sensor(pin_trigger = 7, pin_echo = 11) as sensor:
         if args.verbose:
-                sensor.init_logging('INFO')
+                logging.getLogger().setLevel('DEBUG')
         distance_in_inches = sensor.distance_in_inches()
         res = ("%s: %5.2f in" % (datetime.datetime.now(), distance_in_inches))
         if not args.append:

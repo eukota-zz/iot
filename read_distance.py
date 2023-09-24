@@ -12,16 +12,8 @@ read_interval = args.interval
 print("Distance Read...")
 print("Interval: %5.2f" % read_interval )
 
-def init_logging(log_level = 'WARNING') -> None:
-        console_handler = logging.StreamHandler()
-        console_handler.setLevel(log_level)
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-        console_handler.setFormatter(formatter)
-        logger = logging.getLogger()
-        logger.addHandler(console_handler)
-
 with Sensor(pin_trigger=7, pin_echo=11) as sensor:
-        init_logging('INFO')
+        logging.getLogger().setLevel('DEBUG')
         while(True):
                 print("Distance: %5.2f in" % sensor.distance_in_inches())
                 time.sleep(read_interval)
