@@ -17,9 +17,9 @@ class Sensor:
         GPIO.setup(self.PIN_TRIGGER, GPIO.OUT)
         GPIO.setup(self.PIN_ECHO, GPIO.IN)
         GPIO.output(self.PIN_TRIGGER, GPIO.LOW)
-        logging.getLogger().info("Waiting for sensor to settle")
+        logging.info("Waiting for sensor to settle")
         time.sleep(5)
-        logging.getLogger().info("Calculating distance")
+        logging.info("Calculating distance")
 
     def __enter__(self):
         return self
