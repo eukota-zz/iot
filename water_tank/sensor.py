@@ -39,5 +39,6 @@ class Sensor:
                 pulse_end_time = time.time()
         pulse_duration = pulse_end_time - pulse_start_time
         roundtrip_distance_in_cm = SPEED_OF_SOUND_IN_CM_PER_S * pulse_duration
-        distance_in_inches = roundtrip_distance_in_cm / 2.0 / 2.54
-        return distance_in_inches
+        self.distance_in_inches = roundtrip_distance_in_cm / 2.0 / 2.54
+        return self.distance_in_inches
+
